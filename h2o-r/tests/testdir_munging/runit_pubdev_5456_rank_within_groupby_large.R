@@ -11,7 +11,7 @@ test.rankwithingroupby <- function() {
     sortDirs <- c(TRUE, FALSE)
     train <- h2o.importFile(locate("bigdata/laptop/jira/train5456_1.csv"))
     answer <- h2o.importFile(locate("bigdata/laptop/jira/rankedFrame1.csv"))
-    rankedF <- h2o.rank_within_group_by(train, groupCols, sortCols, sortDirs, newColName, sortColsSorted=TRUE)
+    rankedF <- h2o.rank_within_group_by(train, groupCols, sortCols, sortDirs, newColName, sort_cols_sorted=TRUE)
     h2o.summary(rankedF)
     compareCol(as.data.frame(answer$new_rank_within_group), as.data.frame(rankedF$new_rank_within_group))
   } else { # do test 2
@@ -21,8 +21,8 @@ test.rankwithingroupby <- function() {
     train <- h2o.importFile(locate("bigdata/laptop/jira/train5456_2.csv"))
     answer <- h2o.importFile(locate("bigdata/laptop/jira/rankedFrame2.csv"))
     rankedF <- h2o.rank_within_group_by(train, groupCols, sortCols) # no optional argument
-    rankedF1 <- h2o.rank_within_group_by(train, groupCols, sortCols, newColName=newColName, sortColsSorted=) # optional colname
-    rankedF2 <- h2o.rank_within_group_by(train, groupCols, sortCols, sortDirs, sortColsSorted=) # optional directions only
+    rankedF1 <- h2o.rank_within_group_by(train, groupCols, sortCols, new_col_name=newColName, sort_cols_sorted=) # optional colname
+    rankedF2 <- h2o.rank_within_group_by(train, groupCols, sortCols, sortDirs, sort_cols_sorted=) # optional directions only
     h2o.summary(rankedF)
     compareCol(as.data.frame(answer$new_rank_within_group), as.data.frame(rankedF$New_Rank_column))
     compareCol(as.data.frame(answer$new_rank_within_group), as.data.frame(rankedF1$new_rank_within_group))

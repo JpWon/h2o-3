@@ -8,7 +8,7 @@ def test_rankWithGroupBy():
     train,groupCols,sortCols = generate_trainingFrame()
     answerFrame, finalDir, finalSorts, sortCols, sortDirs, newColName = generate_answerFrame(train, groupCols, sortCols) # the rank_within_group result should return this
     rankedFrame = train.rank_within_group_by(groupCols, sortCols, sortDirs) if randint(1,10)>5 \
-         else train.rank_within_group_by(groupCols, sortCols, newColName=newColName)
+         else train.rank_within_group_by(groupCols, sortCols, new_col_name=newColName)
     rankedFrame.summary()
     pyunit_utils.compare_frames_local_onecolumn_NA(answerFrame[newColName], rankedFrame[newColName],1, tol=1e-10)    # compare rank column
 
