@@ -565,6 +565,10 @@ h2o.performance <- function(model, newdata=NULL, train=FALSE, valid=FALSE, xval=
 
     ####
     # FIXME need to do the client-side filtering...  PUBDEV-874:   https://0xdata.atlassian.net/browse/PUBDEV-874
+    if (length(res$model_metrics) == 0) {
+      print("WARNING: Model metrics cannot be calculated and metric_json is empty due to the absence of the response column in your dataset.")
+      return(NULL)
+    }
     model_metrics <- Filter(function(mm) { mm$frame$name==newdata.id}, res$model_metrics)[[1]]   # filter on newdata.id, R's builtin Filter function
     #
     ####
